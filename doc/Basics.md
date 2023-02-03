@@ -1,0 +1,89 @@
+# Elixir - Basics
+
+Elixir is a dynamically-typed language, meaning that the type of a variable is only checked at runtime. Using the match ```=``` operator, we can bind a value of any type to a variable name:
+
+```
+count = 1 # Bound an integer value of 1
+count = 2 # You may re-bind variables
+
+count = false # You may re-bind any type to a variable
+
+message = "Success!" # Strings can be created by enclosing characters within double quotes
+```
+
+---
+
+## Modules
+
+Elixir is a functional-programming language and requires all named functions to be defined in a module. The defmodule keyword is used to define a module. All modules are available to all other modules at runtime and do not require an access modifier to make them visible to other parts of the program. A module is analogous to a class in other programming languages.
+
+```
+defmodule Calculator do
+  # ...
+end
+```
+
+## Named functions
+Named Functions must be defined in a module. The def keyword is used to define a public named function.
+
+Each function can have zero or more arguments. The value of the last expression in a function is always implicitly returned.
+
+```
+defmodule Calculator do
+  def add(x, y) do
+    x + y
+  end
+end
+```
+
+Invoking a function is done by specifying its module and function name and passing arguments for each of the function's arguments.
+
+```
+sum = Calculator.add(1, 2)
+# => 3
+```
+
+The defp keyword can be used instead of def to define a private function. Private functions can only be used from within the same module that defined them.
+
+When invoking a function inside the same module where it's defined, the module name can be omitted.
+
+You may also write short functions using a one-line syntax (note the comma , and the colon : around the keyword do).
+
+
+```
+defmodule Calculator do
+  def subtract(x, y) do
+    private_subtract(x, y)
+  end
+
+  defp private_subtract(x, y), do: x - y
+end
+
+difference = Calculator.subtract(7, 2)
+# => 5
+
+difference = Calculator.private_subtract(7, 2)
+# => ** (UndefinedFunctionError) function Calculator.private_subtract/2 is undefined or private
+#       Calculator.private_subtract(7, 2)
+```
+
+Arity of functions
+It is common to refer to functions with their arity. The arity of a function is the number of arguments it accepts.
+
+```
+# add/3 because this function has three arguments, thus an arity of 3
+def add(x, y, z) do
+  x + y + z
+end
+```
+
+
+## Standard library
+Elixir has a very rich and well-documented standard library. The documentation is available online at hexdocs.pm/elixir. Save this link somewhere - you will use it a lot!
+
+Most built-in data types have a corresponding module that offers functions for working with that data type, e.g. there's the Integer module for integers, String module for strings, List module for lists and so on.
+
+A notable module is the Kernel module. It provides the basic capabilities on top of which the rest of the standard library is built, like arithmetic operators, control-flow macros, and much more. Functions for the Kernel module are automatically imported, so you can use them without the Kernel. prefix.
+
+## Code comments
+Comments can be used to leave notes for other developers reading the source code. Single line comments in Elixir are preceded by #.
